@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Destaques do Motocross 2.0</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-image: url("imagens/fundo.avif"); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        * { box-sizing: border-box; }
+
+        .menu-topo {
+            background-color: rgba(26, 26, 26, 0.95);
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            border-bottom: 3px solid #d35400;
+        }
+
+        .menu-topo a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .menu-topo a:hover {
+            color: #f4a261;
+        }
+
+        @keyframes pulsar {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .badge-destaque {
+            background: #d35400;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            animation: pulsar 2s infinite ease-in-out;
+            text-transform: uppercase;
+        }
+
+        .cabecalho {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 4px solid #f4a261;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .logo-principal {
+            max-width: 150px;
+            transition: transform 0.3s;
+        }
+        
+        .logo-principal:hover { transform: scale(1.05); }
+
+        .titulo-principal {
+            font-size: 3rem;
+            margin: 15px 0;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo-grid img {
+            max-height: 50px; 
+            width: auto;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        .logo-grid img:hover {
+            transform: scale(1.1); 
+        }  
+
+        .container {
+            display: flex;
+            max-width: 1200px; 
+            margin: 30px auto;  
+            gap: 20px; 
+            padding: 0 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .card:hover { 
+            transform: translateY(-10px); 
+            background: rgba(255, 255, 255, 0.98);
+            border-left: 8px solid #d35400;
+        }
+
+        .esquerda, .direita { width: 300px; }
+        .principal { flex: 1; }
+
+        h1, h2 { color: #d35400; margin-top: 0; }
+        
+        .texto-piloto {
+            font-size: 15px;
+            text-align: justify;
+            color: #444;
+            margin-top: 15px;
+        }
+
+        .img-box {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 3px solid #eee;
+        }
+
+        .img-box img { width: 100%; display: block; transition: 0.5s; }
+
+        .intro-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 1100px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .rodape {
+            padding: 40px;
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 5px solid #d35400;
+        }
+
+        @media(max-width: 950px) {
+            .container { flex-direction: column; }
+            .esquerda, .direita { width: 100%; }
+        }
+    </style>
+    <script>
+    
+        const imagensFundo = [
+            "imagens/fundo.avif",
+            "imagens/a3.jpeg",
+            "imagens/a7.webp",
+            "imagens/a5.jpg"
+        ];
+
+
+        const sorteio = imagensFundo[Math.floor(Math.random() * imagensFundo.length)];
+
+
+        document.documentElement.style.setProperty('--bg-image', "url('" + sorteio + "')");
+        
+
+        window.onload = function() {
+            document.body.style.backgroundImage = "url('" + sorteio + "')";
+        };
+    </script>
+</head>
+<body>
+    <div id="progress-bar" style="position: fixed; top: 0; left: 0; width: 0%; height: 6px; background: #d35400; z-index: 10002; transition: width 0.1s;"></div>
+    
+    <nav class="menu-topo">
+        <a href="#">Início</a>
+        <a href="#historia">História</a>
+        <a href="#patrocinio">Patrocínio</a>
+        <a href="#pilotos pioneiros">Pilotos pioneiros</a>
+        <a href="#motos pioneiras">Motos Pioneiras</a>
+        <a href="#pilotos atuais">Pilotos Atuais</a>
+        <a href="#motos atuais">Motos Atuais</a>
+    </nav>
+      
+    <header class="cabecalho">
+        <img src="imagens/mm.avif" alt="Logo" class="logo-principal">
+        <h1 class="titulo-principal">Destaques do Motocross</h1>
+        
+        <div class="patrocinios" id="patrocinio">
+            <h3>Patrocínio </h3>
+            <div class="logo-grid">
+                <img src="imagens/Honda.png">
+                <img src="imagens/ims.png">
+                <img src="imagens/pir.png">
+                <img src="imagens/mo.png">
+                <img src="imagens/ya.png">
+                <img src="imagens/kt.png">
+                <img src="imagens/yam.png">
+                <img src="imagens/am.jpeg">
+                <img src="imagens/blu.png">
+                       <h3>aperte F5 DUAS vezes para alterar o plano de fundo</h3>
+            </div>
+        </div>
+    </header>
+
+    <div class="intro-box" id="historia">
+        <p>
+                               <h3>HÍSTÓRIA DO MOTOCROSS BRASILEIRO</h3>
+             A Evolução do Motocross Brasileiro: Da Poeira dos Pioneiros à Elite Global
+A história do motocross no Brasil começou a ganhar forma nos anos 70, saindo dos trilhos de terra para as pistas organizadas, e tudo começou com três nomes que ficaram conhecidos como os "Três Mosqueteiros". Nivanor Bernardi, o "Touro do Paraná", foi o primeiro grande campeão nacional, dominando as pistas com uma força bruta que deu início à paixão do público. Logo ao seu lado, Roberto Boettcher trouxe uma técnica refinada, tornando-se o primeiro brasileiro a disputar uma temporada completa do Mundial de Motocross. Fechando esse trio pioneiro, Pedro Bernardo Raymundo, o lendário Moronguinho, elevou o nível de competitividade ao extremo, acumulando títulos e recordes que demorariam décadas para serem batidos. Eles foram os verdadeiros desbravadores, correndo com motos rudimentares e pouca estrutura, mas com uma coragem que pavimentou o caminho para as gerações futuras.
+
+Com o passar das décadas, o esporte evoluiu de forma exponencial, e o que era movido apenas pela raça bruta transformou-se em uma ciência de alta performance. Hoje, essa linhagem de campeões é representada por pilotos que elevaram o Brasil a um patamar internacional nunca antes visto. Enzo Lopes é o símbolo máximo dessa nova era, sendo o brasileiro com maior destaque na história recente do AMA Supercross nos Estados Unidos. Ele provou que o piloto nacional tem talento para brigar no "top 5" contra os melhores do mundo, unindo uma técnica impecável a um preparo físico de atleta olímpico.
+
+No cenário nacional, a força e a experiência são personificadas por Fábio dos Santos, o Fabinho. Ele é a referência da categoria MX1 no Brasil, um piloto que combina agressividade controlada com uma leitura de pista invejável, sendo o homem a ser batido no Campeonato Brasileiro. Ao seu lado, garantindo que o futuro continue brilhante, surge Guilherme Bresolin. Como o grande expoente da categoria MX2, Bresolin traz a explosão e a velocidade da nova geração, mostrando que o legado dos pioneiros está mais vivo do que nunca.
+
+Do "braço" de Nivanor, Boettcher e Moronguinho à precisão cirúrgica de Enzo, Fabinho e Bresolin, o motocross brasileiro percorreu um longo caminho. O esporte mudou, as motos de 2 tempos deram lugar a máquinas de 4 tempos com tecnologia aeroespacial, mas a essência permanece a mesma: a busca pela vitória no meio da poeira e da adrenalina.
+            <br><br>
+            Ser um piloto no Brasil exige mais do que talento; exige a "raça" característica do nosso povo.
+                                      <h3>ABAIXO OS PILOTOS PIONEIROS E APÓS OS PILOTOS ATUAIS</h3>
+        </p>
+    </div>
+
+     <div class="container" id="pilotos pioneiros">
+        <aside class="esquerda card">
+            <span class="badge-destaque">Primeiro Campeão Nacional</span>
+            <h2>Nivanor Bernardi (O "Touro do Paraná")</h2>
+            <div class="img-box">
+                <img src="imagens/niva.jpeg" alt="Nivanor Bernardi">
+            </div>
+            <p class="texto-piloto">
+                <strong>"O Touro do Paraná":</strong> Nivanor Bernardi: O "Pai" e Primeiro Campeão Nacional
+Nascimento: 28 de novembro de 1948, em Orleans, Santa Catarina.
+Status Atual: Falecido em 14 de maio de 2017 (68 anos).
+
+Nivanor Bernardi é a pedra fundamental do motocross no Brasil. Criado no Paraná, ele personificou a transição do motociclismo de lazer para a competição de alto nível. Conhecido pelo apelido de "Touro do Paraná", sua pilotagem era definida pela força física e por uma resistência inabalável, características essenciais em uma época onde as pistas eram trilhas improvisadas e as motocicletas não passavam de modelos de rua adaptados.
+
+Trajetória e Títulos:
+Nivanor entrou para a história ao conquistar o primeiro Campeonato Brasileiro de Motocross oficial, realizado em 1973. Pilotando motocicletas que exigiam um esforço hercúleo para serem controladas, ele dominou o cenário nacional nos anos 70, acumulando 7 títulos brasileiros. Sua ambição o levou além das fronteiras: em 1977, foi um dos primeiros brasileiros a disputar o GP do Japão, terminando em uma impressionante 11ª colocação, enfrentando as fábricas japonesas em seu próprio quintal.
+
+Aposentadoria e Legado:
+O "Touro" afastou-se das competições profissionais no final da década de 80, mas nunca abandonou o motociclismo, mantendo-se ativo em eventos e mentorando novos pilotos. Nivanor faleceu em 2017, vítima de complicações de um infarto, deixando um legado de coragem que permitiu ao Brasil sonhar com o profissionalismo no esporte.
+
+            </p>
+        </aside>
+     <main class="principal card">
+            <span class="badge-destaque">O Diplomata da Técnica Internacional</span>
+            <h2> Roberto Boettcher("Moronguinho")</h2>
+            <div class="img-box" style="height: 350px;">
+                <img src="imagens/morongo.webp" alt="Enzo" style="height: 100%; object-fit: cover;">
+            </div>     
+            <p class="texto-piloto">
+                <strong>"Moronguinho":</strong>Roberto Boettcher: O Diplomata da Técnica Internacional
+Nascimento: 10 de maio de 1954, em Goiânia, Goiás.
+Status Atual: Vivo (71 anos).
+
+Se Nivanor trouxe a força, Roberto Boettcher trouxe a ciência. O goiano foi o primeiro piloto brasileiro a compreender que o motocross era um esporte de técnica refinada e posicionamento de corpo, e não apenas aceleração bruta. Com um estilo elegante e calculista, ele é creditado por ter "modernizado" a forma como os brasileiros pilotavam.
+
+Trajetória e Títulos:
+Boettcher conquistou seu primeiro título nacional de relevância em 1975, sagrando-se Campeão Brasileiro. Sua busca por evolução o levou à Europa em 1977, onde morou na Alemanha para disputar o Campeonato Mundial pela equipe Maico. Foi o primeiro brasileiro a completar uma temporada internacional, trazendo na bagagem técnicas de suspensão e curvas que revolucionaram o país. Ele foi tricampeão brasileiro e conquistou o prestigiado título de Bicampeão Latino-Americano, consolidando-se como o melhor piloto do continente em sua era.
+
+Aposentadoria e Legado:
+Roberto Boettcher aposentou-se das pistas profissionais em 1984, após uma carreira marcada pela regularidade. Após pendurar o capacete, tornou-se uma figura fundamental nos bastidores, atuando como dirigente na Confederação Brasileira de Motociclismo (CBM) e ajudando a organizar o esporte que ele ajudou a criar. Atualmente, reside em Goiás e continua sendo uma enciclopédia viva do esporte.
+            </p>
+        </main>
+    <aside class="direita card">
+            <span class="badge-destaque">O Fenômeno Incontestável</span>
+            <h2>Pedro Bernardo Raymundo.</h2>
+            <div class="img-box">
+                <img src="imagens/ro.avif" alt="Roberto Boettcher">
+            </div>
+            <p class="texto-piloto">
+                <strong>Pedro Bernardo Raymundo.:</strong> Pedro Bernardo Raymundo.: O Diplomata da Técnica Internacional
+Nascimento: 10 de maio de 1954, em Goiânia, Goiás.
+Status Atual: Vivo (71 anos).
+
+Se Nivanor trouxe a força, Roberto Boettcher trouxe a ciência. O goiano foi o primeiro piloto brasileiro a compreender que o motocross era um esporte de técnica refinada e posicionamento de corpo, e não apenas aceleração bruta. Com um estilo elegante e calculista, ele é creditado por ter "modernizado" a forma como os brasileiros pilotavam.
+
+Trajetória e Títulos:
+Boettcher conquistou seu primeiro título nacional de relevância em 1975, sagrando-se Campeão Brasileiro. Sua busca por evolução o levou à Europa em 1977, onde morou na Alemanha para disputar o Campeonato Mundial pela equipe Maico. Foi o primeiro brasileiro a completar uma temporada internacional, trazendo na bagagem técnicas de suspensão e curvas que revolucionaram o país. Ele foi tricampeão brasileiro e conquistou o prestigiado título de Bicampeão Latino-Americano, consolidando-se como o melhor piloto do continente em sua era.
+
+Aposentadoria e Legado:
+Roberto Boettcher aposentou-se das pistas profissionais em 1984, após uma carreira marcada pela regularidade. Após pendurar o capacete, tornou-se uma figura fundamental nos bastidores, atuando como dirigente na Confederação Brasileira de Motociclismo (CBM) e ajudando a organizar o esporte que ele ajudou a criar. Atualmente, reside em Goiás e continua sendo uma enciclopédia viva do esporte.
+
+            </p>
+        </aside>
+    </div>
+    <div class="container" id="motos pioneiras">
+        <aside class="esquerda card">
+            <span class="badge-destaque">yamaha nacional</span>
+            <h2>Yamaha DT 250 do Nivanor Bernardi:</h2>
+            <div class="img-box">
+                <img src="imagens/dt.jpeg" alt="Yamaha DT 250 do Nivanor Bernardi">
+            </div>
+            <p class="texto-piloto">
+                <strong> Yamaha DT 250:</strong> Yamaha DT 250: A "Mãe" do Motocross Brasileiro
+Antes das motos de competição pura chegarem ao Brasil, a DT 250 era a rainha. Ela não nasceu para as pistas, mas foi nela que o motocross brasileiro deu seus primeiros saltos.
+
+Ficha Técnica: Motor 2 tempos, monocilíndrico, refrigerado a ar. Ela tinha um torque muito forte em baixas rotações, o que ajudava nas subidas íngremes das pistas de barro da época.
+
+A "Mágica" do Nivanor: Nivanor Bernardi pegava a DT 250 de rua, arrancava faróis, painel e trocava o escapamento por um "dimensionado" para ganhar potência. A suspensão era o ponto fraco: dois amortecedores traseiros finos que frequentemente chegavam ao fim do curso (batendo seco).
+
+Títulos: Foi com modelos baseados na DT 250 que Nivanor Bernardi conquistou seu primeiro título brasileiro em 1973. Estima-se que, entre vitórias regionais e nacionais, essa linhagem de motos tenha dado a ele pelo menos 3 dos seus 7 títulos brasileiros.
+            </p>
+        </aside>
+
+        <main class="principal card">
+            <span class="badge-destaque">yamaha importada</span>
+            <h2>Yamaha YZ-G 250 do Moronguinho:</h2>
+            <div class="img-box" style="height: 350px;">
+                <img src="imagens/yzg.jpeg" alt="Yamaha YZ-G 250 do Moronguinho" style="height: 100%; object-fit: cover;">
+            </div>     
+            <p class="texto-piloto">
+                <strong> Yamaha YZ-G:</strong>Yamaha YZ-G (Modelo 1980): A Máquina que Mudou Tudo
+A YZ 250-G é considerada por colecionadores a "motto perfeita" da virada da década. Foi a primeira a trazer o sistema Monocross (um único amortecedor escondido) de forma eficiente para o grande público.
+
+Ficha Técnica: Motor 2 tempos de alto giro, refrigerado a ar, com o famoso sistema de suspensão traseira cantilever. Ela era muito mais leve que a DT e tinha um quadro de cromo-molibdênio que aguentava saltos muito maiores.
+
+O Domínio de Moronguinho e Nivanor: Essa moto foi o pesadelo dos adversários. Moronguinho e Nivanor usaram as variações da linha YZ (como a F e a G) para aniquilar a concorrência. A YZ-G permitia fazer curvas muito mais fechadas e acelerar antes dos outros.
+
+Títulos: Esta plataforma foi responsável pela maior parte da hegemonia de Moronguinho. Só entre 1976 e 1982, Moronguinho e Nivanor revezaram o topo do pódio quase sempre montados em YZs. Pode-se creditar à linha YZ (incluindo a G) pelo menos 12 dos 14 títulos brasileiros do Moronguinho e os títulos finais da carreira do Nivanor. 
+            </p>
+        </main>
+
+        <aside class="direita card">
+            <span class="badge-destaque">Maico </span>
+            <h2>Maico 400 do Roberto Boettcher:</h2>
+            <div class="img-box">
+                <img src="imagens/40.jpeg" alt="Maico 400 do Roberto Boettcher">
+            </div>
+            <p class="texto-piloto">
+                <strong>:Maico 400</strong>Maico 400 (e 440): O Trator Alemão
+Se as Yamaha eram ágeis e leves, a Maico era a força bruta vinda da Alemanha. Nos anos 70, a Maico era a marca a ser batida no Mundial de Motocross.
+
+Ficha Técnica: Motor 2 tempos de grande cilindrada (Open Class), refrigerado a ar. A Maico era famosa pela sua "frente" perfeita: a moto ia exatamente para onde o piloto apontava o guidão. O torque era tão ignorante que o piloto quase não precisava trocar de marcha; ela subia qualquer parede.
+
+A Escola de Boettcher: Roberto Boettcher foi o mestre da Maico. Ele correu com essas máquinas na Europa e as trouxe para o Brasil. Era uma moto para pilotos altos e fortes, pois o "coice" do motor de 400cc era brutal.
+
+Títulos: Boettcher conquistou seu Campeonato Brasileiro de 1975 e seus títulos Latino-Americanos utilizando a força das Maico. No Brasil, essa moto ajudou Boettcher a garantir seus 3 títulos nacionais, batendo de frente com as motos japonesas que eram mais leves, mas menos potentes nas subidas.
+            </p>
+        </aside>
+    </div>
+     
+
+
+    <div class="container" id="pilotos atuais">
+        <aside class="esquerda card">
+            <span class="badge-destaque">Revelação</span>
+            <h2>Guilherme Bresolin</h2>
+            <div class="img-box">
+                <img src="imagens/bresolin.jpeg" alt="Bresolin">
+            </div>
+            <p class="texto-piloto">
+                <strong>Guilherme Bresolin:</strong> O Fenômeno da Nova Geração, Guilherme Bresolin, surge como a personificação da velocidade e o nome que define o futuro do motocross no Brasil. Em um esporte onde a agressividade costuma ditar o ritmo, Bresolin se destaca por uma abordagem distinta, elevando a pilotagem a um nível de refinamento técnico que impressiona tanto veteranos quanto entusiastas da modalidade.
+
+O grande diferencial do Guilherme na pista é o seu "flow" característico. Ele possui uma fluidez fora do comum, uma simbiose com a moto que permite que ele conecte seções complexas de saltos e canaletas com uma naturalidade desconcertante. Para quem assiste das arquibancadas, o estilo do Bresolin faz com que as manobras mais técnicas e arriscadas pareçam simples, tamanha é a suavidade com que ele absorve os impactos e mantém a inércia da moto sempre em progressão.
+
+Essa eficiência mecânica e corporal se traduz em ritmo de prova constante. Ao gastar menos energia com movimentos desnecessários, Guilherme consegue manter tempos de volta consistentes do início ao fim das baterias, tornando-se um adversário letal nas voltas decisivas. Ele representa a evolução do motocross moderno: menos força bruta, mais inteligência de traçado e uma técnica de posicionamento que beira a perfeição.
+
+Em suma, Guilherme Bresolin não é apenas uma promessa; ele é uma realidade que reescreve a forma de pilotar no país. Sua ascensão meteórica é o reflexo de um talento lapidado pelo "flow", consolidando-o como o sucessor natural dos grandes ídolos e a maior aposta brasileira para o domínio das pistas nos próximos anos.
+            </p>
+        </aside>
+
+        <main class="principal card">
+            <span class="badge-destaque">Destaque Internacional</span>
+            <h2>Enzo Lopes</h2>
+            <div class="img-box" style="height: 350px;">
+                <img src="imagens/enz.avif" alt="Enzo" style="height: 100%; object-fit: cover;">
+            </div>     
+            <p class="texto-piloto">
+                <strong> Enzo Lopes:</strong> O Embaixador Brasileiro no AMA, Enzo Lopes, não é apenas um competidor; ele é o piloto que elevou a bandeira do Brasil ao patamar mais alto da história recente do motocross internacional. No cenário implacável do AMA Supercross, onde os melhores do mundo se enfrentam em estádios lotados, Enzo quebrou barreiras históricas ao consolidar-se como uma presença constante no Top 5, provando que o talento brasileiro possui a técnica e a resiliência necessárias para vencer além de qualquer fronteira.
+
+A trajetória de Enzo nos Estados Unidos é marcada por uma evolução técnica impressionante. Ele domina as seções de whoops (costelas) e os ritmos de saltos mais complexos com uma fluidez que o coloca em pé de igualdade com as lendas da modalidade. Sua capacidade de classificar-se com tempos de ponta e sustentar baterias de alta intensidade sob os holofotes do AMA demonstra um preparo físico e psicológico de elite, essencial para sobreviver à pressão de um campeonato onde qualquer erro pode ser fatal para a temporada.
+
+Mais do que estatísticas e troféus, o impacto de Enzo Lopes reside no pioneirismo. Ele abriu portas e serviu de inspiração para uma nova geração de pilotos sul-americanos, mostrando que é possível sair das pistas nacionais e brigar de igual para igual em equipes de fábrica nos EUA. Sua consistência em resultados expressivos transformou a percepção global sobre os brasileiros no motocross, consolidando seu nome como uma referência de profissionalismo e velocidade pura.
+
+Em suma, Enzo é a síntese da garra e do refinamento técnico, um embaixador que carrega consigo a esperança de milhares de fãs brasileiros a cada gate que cai em solo americano.
+            </p>
+        </main>
+
+        <aside class="direita card">
+            <span class="badge-destaque">Líder MX1</span>
+            <h2>Fábio Santos</h2>
+            <div class="img-box">
+                <img src="imagens/fab.jpeg" alt="Fabinho">
+            </div>
+            <p class="texto-piloto">
+                <strong>:</strong> O "General" da MX1 Nacional, Fábio Santos, consolidou-se como o nome a ser batido no motocross brasileiro, elevando o patamar da categoria principal ao representar a equipe oficial Yamaha Monster Energy Geração. Dentro do gate, a presença do Fabinho é sinônimo de dominância e autoridade, fruto de uma combinação raríssima de talento técnico e uma disciplina espartana que o mantém no topo do pódio de forma soberana.
+
+O que realmente define o "General" dentro das pistas vai muito além da velocidade pura. Ele é reconhecido por uma força física impressionante, que lhe permite manter a Yamaha YZ 450F sob controle total mesmo nos momentos finais de baterias longas e desgastantes, onde o terreno já está destruído e exige o máximo do atleta. Sua pilotagem é agressiva, porém precisa, refletindo um domínio absoluto sobre a máquina em qualquer condição de solo.
+
+Aliado ao vigor físico, Fábio Santos ostenta um preparo mental inabalável. Ele é um piloto que cresce sob pressão; quanto mais disputada é a prova, mais ele demonstra frieza para traçar as melhores linhas e administrar a vantagem. Essa mentalidade resiliente é o que o torna um estrategista de elite, capaz de ler a corrida e atacar no momento exato, neutralizando qualquer tentativa de aproximação dos adversários.
+
+Em suma, o Fabinho não é apenas um competidor; ele é o padrão de excelência do motocross nacional. Sua trajetória na MX1 é a prova de que a união entre a engenharia de ponta da Yamaha e a mentalidade de um campeão forja um legado difícil de ser superado.
+            </p>
+        </aside>
+    </div>
+
+    <div class="container" id="motos atuais">
+        <aside class="esquerda card">
+            <span class="badge-destaque">Kawasaki</span>
+            <h2>KX 450 Bresolin</h2>
+            <div class="img-box">
+                <img src="imagens/m2.jpeg" alt="Moto Bresolin">
+            </div>
+            <p class="texto-piloto">
+                <strong> Kawasaki KX 450:</strong> A Kawasaki KX 450 do Bresolin é uma das máquinas mais respeitadas do grid, representando o que há de mais avançado na engenharia japonesa voltada para o motocross de alto rendimento. Projetada para vencer, a moto do Fabinho não é apenas um exemplo de potência bruta, mas um conjunto cirurgicamente ajustado para as exigências brutais das pistas profissionais.
+
+O grande diferencial dessa KX 450 está no seu acerto de suspensão de competição. Diferente de um ajuste padrão, a configuração utilizada pelo Bresolin é personalizada para garantir uma leitura de terreno impecável, permitindo que ele atropele os bumps mais agressivos e mantenha a trajetória perfeita dentro das canaletas mais fundas e técnicas. Esse equilíbrio entre firmeza e absorção é o que mantém a roda colada no chão, traduzindo cada movimento em tração e velocidade.
+
+Além da ciclística refinada, o motor 4 tempos de 450cc entrega uma potência explosiva, mas com uma entrega de torque que permite saídas de curva extremamente rápidas. Aliada à tecnologia de ponta da Kawasaki — como o controle de largada (Launch Control) e os mapas de ignição intercambiáveis — a moto se torna uma extensão do piloto, oferecendo a confiança necessária para encarar saltos triplos e seções de costelas com total agressividade.
+
+Em suma, a KX 450 do Fabinho Bresolin é a união perfeita entre a brutalidade mecânica e o refinamento técnico, preparada para suportar o desgaste de uma bateria completa de MX sob as condições mais severas de pista.
+            </p>
+        </aside>
+
+        <main class="principal card">
+            <span class="badge-destaque">Yamaha</span>
+            <h2>YZ 450F Enzo Lopes</h2>
+            <div class="img-box" style="height: 350px;">
+                <img src="imagens/m1.avif" alt="Moto Enzo" style="height: 100%; object-fit: cover;">
+            </div>
+            <p class="texto-piloto">
+                <strong>Yamaha YZ 450F (Edição AMA Pro):</strong>A Yamaha YZ 450F (Edição AMA Pro) do Enzo Lopes é o estado da arte do motocross mundial, uma máquina meticulosamente preparada para carregar o talento do brasileiro nos templos do Supercross e Motocross americano. Representando o Brasil no mais alto nível, a moto do Enzo não é apenas um veículo de série, mas uma ferramenta de precisão ajustada para as exigências desumanas das pistas do AMA.
+
+O coração dessa fera é o motor com cabeçote invertido, uma exclusividade da Yamaha que revoluciona a centralização de massa. Com a admissão posicionada à frente e a exaustão atrás, o centro de gravidade da moto fica perfeitamente equilibrado, permitindo que o Enzo tenha uma agilidade absurda para "entortar" a moto nos saltos e mudar de direção em frações de segundo dentro das canaletas profundas.
+
+Nas mãos de um piloto do calibre do Enzo Lopes, a entrega de potência de 450cc é mapeada para ser explosiva nos whoops (costelas) e ditar o ritmo nas saídas de gate, onde o controle de tração eletrônico faz a diferença entre o holeshot e o pelotão de trás. Tudo isso é sustentado pelas suspensões KYB de fábrica (A-Kit), componentes de altíssimo custo e tecnologia, valvulados especificamente para o peso e o estilo de pilotagem agressivo do brasileiro, garantindo que a moto absorva impactos de triplos gigantescos sem perder a estabilidade.
+
+Cada parafuso de titânio e cada ajuste de mapa via Wi-Fi na YZ 450F do Enzo são pensados para um único objetivo: transformar a engenharia japonesa na arma perfeita para enfrentar os melhores pilotos do planeta. É a união da tecnologia de ponta com a garra brasileira no cenário mais competitivo do mundo.
+            </p>
+        </main>
+
+        <aside class="direita card">
+            <span class="badge-destaque">yamaha </span>
+            <h2> YZ 450F do Fabinho Santos</h2>
+            <div class="img-box">
+                <img src="imagens/m3.jpg" alt="Moto Fabinho">
+            </div>
+            <p class="texto-piloto">
+                <strong>A Yamaha YZ 450F do Fabinho Santos:</strong> A Yamaha YZ 450F do Fabinho Santos é uma verdadeira joia do motocross nacional, preparada para entregar o máximo de performance nas pistas. Diferente de qualquer moto de rua, essa 450 é uma máquina de competição pura, onde cada detalhe é otimizado para baixar o tempo de volta e encarar os saltos mais pesados.
+
+Aqui estão os pilares dessa máquina:
+
+Motor Invertido de 450cc: O coração da moto é o motor 4 tempos com o exclusivo cabeçote invertido da Yamaha. Essa engenharia centraliza a massa, melhorando a agilidade nas curvas e entregando um torque bruto e linear que a projeta para fora das canaletas com muita força.
+
+Ajuste Via App: Uma das maiores vantagens é o uso do Power Tuner, que permite ao Fabinho remapear a ignição e a mistura de combustível pelo celular, adaptando a entrega de potência para cada tipo de terreno, seja areia ou terra batida.
+
+Suspensão KYB: Equipada com o que há de melhor, a suspensão é preparada para absorver impactos secos de grandes saltos e manter a leitura do terreno nas costelas, garantindo tração máxima em situações extremas.
+
+Ciclística e Leveza: O chassi de alumínio é desenhado para ser rígido e leve ao mesmo tempo, permitindo que o piloto tenha precisão total na pilotagem agressiva que o motocross exige.
+            </p>
+        </aside>
+    </div>
+
+    <footer class="rodape">
+        <p><strong>© 2026 DESTAQUES DO MOTOCROSS</strong></p>
+        <p style="color: #888; font-size: 14px;">Desenvolvido por: João Augusto Biava</p>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
